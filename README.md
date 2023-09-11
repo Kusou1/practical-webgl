@@ -22,3 +22,17 @@ To run it, simply:
 4. Install the dependencies with `npm install`
 5. Run it with `npm run start`.
 
+
+## Reference Link
+
+# WebGL Texture Mapping
+
+https://ksuweb.kennesaw.edu/~bsetzer/4722sp20/nanoc/output/modules/m08-textures/m10B-webgl-textures/
+
+# Texture Filter Demo 
+
+https://voxelent.com/html/beginners-guide/chapter_7/ch7_Texture_Filters.html
+
+# Mip Map
+
+https://webglfundamentals.org/webgl/lessons/zh_cn/webgl-3d-textures.html

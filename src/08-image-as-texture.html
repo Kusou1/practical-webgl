@@ -239,17 +239,18 @@
 
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
 
-      // Set the x wrapping mode for our active gl.TEXTURE_2D (texture)
       // texParameterf(target, pname, param)
+      // Set the x wrapping mode for our active gl.TEXTURE_2D (texture)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl[textureWrapSMode])
-      // Set the y wrapping mode for our active gl.TEXTURE_2D (texture)
+      // Set the y wrapping mode for our active gl.TEXTURE_2D (texture), T => Y Axis
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl[textureWrapTMode])
       // Set the min filter for our active gl.TEXTURE_2D
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl[textureMinFilter])
-      // Set the mag filter for our active gl.TEXTURE_2D
+      // Set the magnifition filter for our active gl.TEXTURE_2D
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl[textureMagFilter])
 
       // Supply the image to the newly created gl.TEXTURE_2D (texture)
+      // https://ksuweb.kennesaw.edu/~bsetzer/4722sp20/nanoc/output/modules/m08-textures/m10B-webgl-textures/
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image)
 
       // Generate mipmap levels for our texture

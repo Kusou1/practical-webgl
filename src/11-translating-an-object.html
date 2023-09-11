@@ -127,10 +127,11 @@
     // Look up "color" attribute variable location on our GPU
     const colorAttributeLocationOnGPU = gl.getAttribLocation(drawingProgram, 'color') // 1
 
-    // Look up "time" uniform variable location on our GPU
-
+    
     // Before we can look up uniform variable locations on our GPU, we must explicitly use the appropriate WebGLProgram that we are interested in
     gl.useProgram(drawingProgram)
+    
+    // Look up "time" uniform variable location on our GPU
     const timeUniformLocationOnGPU = gl.getUniformLocation(drawingProgram, 'time')
 
     // Rendering loop

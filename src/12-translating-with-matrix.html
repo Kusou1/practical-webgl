@@ -182,6 +182,7 @@
       translationMatrix[13] = Math.sin(-timeElapsedSinceStart) * moveRadius
 
       // Pass the time elapsed since the start of my render loop to my drawingProgram
+      // false mean a GLboolean specifying whether to transpose the matrix. Must be false.
       gl.uniformMatrix4fv(translationMatrixUniformLocationOnGPU, false, translationMatrix)
 
       // Issue a draw command using my active WebGLProgram

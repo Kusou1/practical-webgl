@@ -36,3 +36,7 @@ https://voxelent.com/html/beginners-guide/chapter_7/ch7_Texture_Filters.html
 # Mip Map
 
 https://webglfundamentals.org/webgl/lessons/zh_cn/webgl-3d-textures.html
+
+# Debugger WebGl
+
+https://github.com/BabylonJS/Spector.js/

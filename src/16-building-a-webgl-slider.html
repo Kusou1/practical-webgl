@@ -123,17 +123,6 @@
       uniform vec2 transitionCenter;
 
       varying vec2 v_uv;
-      
-      vec4 sampleFromTextureAtIndex (sampler2D textures[7], int textureIndex, vec2 uv) {
-        vec4 outputColor = vec4(0.0);
-        for (int i = 0; i < 7; ++i) {
-          vec4 textureColorAtIndex = texture2D(textures[i], uv);
-          if (i == textureIndex) {
-            outputColor = textureColorAtIndex;
-          }
-        }
-        return outputColor;
-      }
 
       float rand(vec2 co) {
         return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
@@ -146,8 +135,22 @@
         float dist = distance(transitionCenter, v_uv) / threshold;
         float r = slideMixFactor - min(rand(vec2(v_uv.y, 0.0)), rand(vec2(0.0, v_uv.x)));
 
-        vec4 activeTextureColor = sampleFromTextureAtIndex(textures, activeSlideIdx, v_uv);
-        vec4 nextTextureColor = sampleFromTextureAtIndex(textures, nextSlideIdx, v_uv);
+        vec4 activeOutput = vec4(0.0);
+        for (int i = 0; i < 7; ++i) {
+          vec4 textureColorAtIndex = texture2D(textures[i], v_uv);
+          if (i == activeSlideIdx) {
+            activeOutput = textureColorAtIndex;
+          }
+        }
+        vec4 activeTextureColor = activeOutput;
+        vec4 nextOutput = vec4(0.0);
+        for (int i = 0; i < 7; ++i) {
+          vec4 textureColorAtIndex = texture2D(textures[i], v_uv);
+          if (i == nextSlideIdx) {
+            nextOutput = textureColorAtIndex;
+          }
+        }
+        vec4 nextTextureColor = nextOutput;
       
         float augmentedSlideFactor = mix(0.0, mix(step(dist, r), 1.0, smoothstep(1.0-fadeEdge, 1.0, slideMixFactor)), smoothstep(0.0, fadeEdge, slideMixFactor));
         gl_FragColor = mix(activeTextureColor, nextTextureColor, augmentedSlideFactor);
@@ -259,12 +262,19 @@
     prevButton.addEventListener('click', onButtonSlideClick)
     nextButton.addEventListener('click', onButtonSlideClick)
 
+    let sliding = false
     function onButtonSlideClick (e) {
+      if(sliding) {
+        return
+      }
+
+      sliding = true
       const clickedButtonID = e.target.getAttribute('id')
 
       if (slideTransitionPlayback) {
         slideTransitionPlayback.stop()
       }
+
 
       if (clickedButtonID === 'prev-button') {
         transitionCenter = [0, 0.45]
@@ -284,6 +294,7 @@
               activeSlideIdx = SLIDER_IMAGE_URLS.length - 1
             }
             slideMixFactor = 0
+            sliding = false
           }
         })
       } else if (clickedButtonID === 'next-button') {
@@ -302,6 +313,7 @@
           onComplete: () => {
             activeSlideIdx = nextSlideIdx
             slideMixFactor = 0
+            sliding = false
           }
         })
         // activeSlideIdx++

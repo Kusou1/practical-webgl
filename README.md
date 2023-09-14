@@ -48,3 +48,7 @@ https://webglfundamentals.org/webgl/lessons/zh_cn/webgl-2d-matrices.html
 # GL Transitions
 
 https://gl-transitions.com/gallery
+
+# Kernal (image processing)
+
+https://en.wikipedia.org/wiki/Kernel_(image_processing)

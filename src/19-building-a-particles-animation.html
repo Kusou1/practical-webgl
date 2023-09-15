@@ -34,6 +34,10 @@
     #canvas {
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
+    
+    #changeBtn {
+      margin-left: 20px;
+    }
 
   </style>
 
@@ -45,6 +49,8 @@
   <div id="container">
     <h1>19 - Building a particles animation</h1>
     <canvas id="canvas"></canvas>
+
+    <button id="changeBtn">change Shape</button>
   </div>
 
   <script>
@@ -124,7 +130,7 @@
     const circleScaleLocation = gl.getUniformLocation(drawingProgram, 'circleScale')
     const sinXScaleLocation = gl.getUniformLocation(drawingProgram, 'sinXScale')
 
-    setInterval(changeShape, 2000)
+    // setInterval(changeShape, 2000)
 
     requestAnimationFrame(renderFrame)
 
@@ -132,6 +138,9 @@
       circleScaleTarget = 1 + Math.random() * 8
       sinXScaleTarget = Math.random()
     }
+
+    const changeBtn = document.getElementById('changeBtn')
+    changeBtn.addEventListener('click', changeShape)
 
     function renderFrame (timeElapsed) {
       timeElapsed /= 1000
